@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <title>My Website</title>
 </head>
 
@@ -35,8 +37,7 @@
   </section>
   <!-- End Header -->
 
-
-  <!-- Hero Section  -->
+  <!-- Hero Section -->
   <section id="hero">
     <div class="hero container">
       <div>
@@ -47,46 +48,221 @@
       </div>
     </div>
   </section>
-  <!-- End Hero Section  -->
+  <!-- End Hero Section -->
 
-  <!-- Service Section -->
-  <section id="services">
-    <div class="services container">
-      <div class="service-top">
-        <h1 class="section-title">Serv<span>i</span>ces</h1>
-        <p>A Full Stack .NET developer with strong expertise in C#, .NET Core, and database management 
-          using SQL and MS SQL Server. Skilled in backend development with Entity Framework and API creation, 
-          while also building interactive user interfaces using HTML, CSS, and JavaScript without frameworks. 
-          Security is a priority, with experience in implementing JWT authentication and ensuring efficient deployment using Docker, 
-          CI/CD, and cloud services like Azure or AWS. Passionate about coding, problem-solving, and 
-          continuous skill enhancement through real-world projects.</p>
+  <!-- About Section -->
+  <section id="about">
+    <div class="about container">
+      <div class="col-left">
+        <div class="about-img">
+          <img src="img-2.jpg" alt="img">
+        </div>
       </div>
-      <div class="service-bottom">
-        <div class="service-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-          <h2>Web Development</h2>
-          <p>Building robust and scalable web applications using .NET Core and Entity Framework for backend development, ensuring efficient data management and seamless integration.</p>
-        </div>
-        <div class="service-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-          <h2>API Development</h2>
-          <p>Creating RESTful APIs with .NET Core to enable smooth communication between different parts of the application and third-party services.</p>
-        </div>
-        <div class="service-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-          <h2>Database Management</h2>
-          <p>Utilizing Entity Framework for efficient database management, including migrations, seeding, and complex queries to ensure data integrity and performance.</p>
-        </div>
-        <div class="service-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-          <h2>Frontend Development</h2>
-          <p>Developing responsive and user-friendly interfaces using HTML, CSS, and JavaScript without relying on frontend frameworks, ensuring lightweight and fast-loading pages.</p>
-        </div>
-</div>
+      <div class="col-right">
+        <h1 class="section-title">About <span>me</span></h1>
+        <h2>Full-Stack Developer| Flutter | .NET Core MVC | Programming & Math Instructor</h2>
+        <p>I am a Full-Stack Developer with expertise in .NET Core MVC for backend systems and Flutter for building dynamic mobile applications. I leverage Firebase for real-time databases, authentication, and cloud integration to deliver modern, scalable solutions. Beyond development, I am a dedicated Programming & Math Instructor, teaching coding and problem-solving skills to students. My work is driven by a passion for innovation, precision, and continuous learning. Whether developing cutting-edge applications or mentoring aspiring developers, I strive to create impactful, user-centric solutions and inspire others to excel in tech.</p>
+        <a href="https://drive.google.com/file/d/1wAompgCme_Oci2CVlIK7LSnv_S3QYfwQ/view?usp=sharing" class="cta">Download Resume</a>
       </div>
     </div>
   </section>
-  <!-- End Service Section -->
+  <!-- End About Section -->
+<!-- Skills Section -->
+<section id="skills">
+  <div class="skills container">
+    <h1 class="section-title">Tech <span>Skills</span></h1>
+    <div class="skills-grid">
+      <!-- Row 1 -->
+      <div class="skill-row">
+        <div class="skill-item">
+          <img src="flutter.png" alt="Flutter Icon" class="skill-icon">
+          <p>Flutter</p>
+        </div>
+        <div class="skill-item">
+          <img src="dart.png" alt="Dart Icon" class="skill-icon">
+          <p>Dart</p>
+        </div>
+        <div class="skill-item">
+          <i class="fas fa-fire"></i>
+          <p>Firebase</p>
+        </div>
+        <div class="skill-item">
+          <i class="fab fa-microsoft"></i>
+          <p>ASP.NET MVC</p>
+        </div>
+        <div class="skill-item">
+          <i class="fas fa-database"></i>
+          <p>Entity Framework</p>
+        </div>
+      </div>
+      <!-- Row 2 -->
+      <div class="skill-row">
+        <div class="skill-item">
+          <i class="fas fa-database"></i>
+          <p>SQL Server</p>
+        </div>
+        <div class="skill-item">
+          <i class="fab fa-microsoft"></i>
+          <p>C#</p>
+        </div>
+        <div class="skill-item">
+          <i class="fab fa-html5"></i>
+          <p>HTML</p>
+        </div>
+        <div class="skill-item">
+          <i class="fab fa-css3-alt"></i>
+          <p>CSS</p>
+        </div>
+        <div class="skill-item">
+          <i class="fab fa-js-square"></i>
+          <p>JavaScript</p>
+        </div>
+      </div>
+      <!-- Row 3 -->
+      <div class="skill-row">
+        <div class="skill-item">
+          <i class="fas fa-code"></i>
+          <p>C++</p>
+        </div>
+        <div class="skill-item">
+          <i class="fas fa-microchip"></i>
+          <p>Arduino</p>
+        </div>
+        <div class="skill-item">
+          <i class="fas fa-robot"></i>
+          <p>ROS</p>
+        </div>
+        <div class="skill-item">
+          <i class="fas fa-eye"></i>
+          <p>OpenCV</p>
+        </div>
+        <div class="skill-item">
+          <i class="fas fa-file-excel"></i>
+          <p>Microsoft Office</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Skills Section -->
+<!-- Service Section -->
+<section id="services">
+  <div class="services container">
+    <div class="service-top">
+      <h1 class="section-title">Serv<span>i</span>ces</h1>
+      <p>As a Full-Stack Developer and Programming & Math Instructor, I offer a wide range of services to help businesses and individuals achieve their goals. Below are the key services I provide:</p>
+    </div>
+    <div class="service-bottom">
+      <!-- Web Development Services -->
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Web Development</h2>
+        <p>Build scalable and secure web applications using <strong>.NET Core MVC</strong> and modern frontend technologies (HTML, CSS, JavaScript). Develop RESTful APIs for seamless integration.</p>
+      </div>
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>E-commerce Solutions</h2>
+        <p>Create feature-rich e-commerce platforms with payment gateway integration, user authentication, and product management.</p>
+      </div>
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Content Management Systems</h2>
+        <p>Develop custom CMS solutions tailored to client needs for easy content updates and management.</p>
+      </div>
+
+      <!-- Mobile App Development Services -->
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Mobile App Development</h2>
+        <p>Build dynamic and responsive cross-platform mobile applications using <strong>Flutter</strong> and integrate <strong>Firebase</strong> for real-time databases and authentication.</p>
+      </div>
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Custom Mobile Solutions</h2>
+        <p>Develop mobile apps for specific industries (e.g., healthcare, education, finance) with tailored features and functionalities.</p>
+      </div>
+
+      <!-- Backend Development Services -->
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>API Development</h2>
+        <p>Design and develop RESTful APIs using <strong>.NET Core</strong> for seamless communication between frontend and backend systems.</p>
+      </div>
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Database Management</h2>
+        <p>Set up and manage databases using <strong>SQL Server</strong> or <strong>Firebase</strong> for efficient data storage and retrieval.</p>
+      </div>
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Cloud Integration</h2>
+        <p>Integrate cloud services like <strong>Firebase</strong>, <strong>Azure</strong>, or <strong>AWS</strong> for scalable and reliable backend solutions.</p>
+      </div>
+
+      <!-- Real-Time Applications -->
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Real-Time Chat Applications</h2>
+        <p>Develop real-time chat apps using <strong>Firebase</strong> for instant messaging and notifications.</p>
+      </div>
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Collaboration Tools</h2>
+        <p>Build collaborative platforms (e.g., project management tools, online whiteboards) with real-time updates.</p>
+      </div>
+
+      <!-- Teaching and Mentoring Services -->
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Programming Instruction</h2>
+        <p>Teach programming languages like <strong>C#</strong>, <strong>Dart</strong>, and <strong>JavaScript</strong>, as well as frameworks like <strong>.NET Core</strong> and <strong>Flutter</strong>.</p>
+      </div>
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Math Tutoring</h2>
+        <p>Provide math tutoring for students, focusing on problem-solving and logical thinking skills.</p>
+      </div>
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Coding Bootcamps</h2>
+        <p>Organize coding bootcamps to help beginners learn full-stack development or mobile app development.</p>
+      </div>
+
+      <!-- Consultation and Training -->
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Tech Consultation</h2>
+        <p>Offer consultation services to businesses for choosing the right tech stack and architecture for their projects.</p>
+      </div>
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Team Training</h2>
+        <p>Train development teams on <strong>.NET Core</strong>, <strong>Flutter</strong>, and <strong>Firebase</strong> to enhance their skills and productivity.</p>
+      </div>
+
+      <!-- Freelance Projects -->
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Freelance Development</h2>
+        <p>Take on freelance projects for web and mobile app development, backend systems, and API integrations.</p>
+      </div>
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Project Rescue</h2>
+        <p>Help clients fix or improve existing projects by debugging, optimizing, and adding new features.</p>
+      </div>
+
+      <!-- Specialized Services -->
+      <div class="service-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+        <h2>Authentication Systems</h2>
+        <p>Implement secure authentication systems using <strong>Firebase Authentication</strong> or <strong>JWT</strong> for web and mobile apps.</p>
+      </div>
+      
+    </div>
+  </div>
+</section>
+<!-- End Service Section -->
 
   <!-- Projects Section -->
   <section id="projects">
@@ -99,69 +275,73 @@
           <div class="project-info">
             <h1>Project 1</h1>
             <h2>E-commerce Website</h2>
-<p>Our E-commerce website specializes in electronics devices, providing a seamless online shopping experience. We offer a wide range of products including smartphones, laptops, tablets, and accessories. Built with .NET Core and Entity Framework, it ensures robust backend support for efficient data management and secure transactions. The frontend is designed using HTML, CSS, and JavaScript, delivering a responsive and user-friendly interface. Features include product search, user authentication, shopping cart, order management, and payment gateway integration, all aimed at providing a comprehensive and enjoyable shopping experience for users.</p>
+            <p>Our E-commerce website specializes in electronics devices, providing a seamless online shopping experience. We offer a wide range of products including smartphones, laptops, tablets, and accessories. Built with .NET Core and Entity Framework, it ensures robust backend support for efficient data management and secure transactions. The frontend is designed using HTML, CSS, and JavaScript, delivering a responsive and user-friendly interface. Features include product search, user authentication, shopping cart, order management, and payment gateway integration, all aimed at providing a comprehensive and enjoyable shopping experience for users.</p>
           </div>
           <div class="project-img">
-            <img src="./img/img-1.png" alt="img">
+            <img src="img-1.png" alt="img">
           </div>
         </div>
       </div>
     </div>
   </section>
   <!-- End Projects Section -->
-
-  <!-- About Section -->
-  <section id="about">
-    <div class="about container">
-      <div class="col-left">
-        <div class="about-img">
-          <img src="./img/img-2.jpg" alt="img">
+<!-- Contact Section -->
+<section id="contact">
+  <div class="contact container">
+    <div>
+      <h1 class="section-title">Contact <span>info</span></h1>
+    </div>
+    <div class="contact-items">
+      <!-- Phone -->
+      <div class="contact-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/phone.png" /></div>
+        <div class="contact-info">
+          <h1>Phone</h1>
+          <h2>+201123983683</h2>
+          <h2>+201099531327</h2>
         </div>
       </div>
-      <div class="col-right">
-        <h1 class="section-title">About <span>me</span></h1>
-        <h2>Full Stack .NET Developer</h2>
-        <p>I am a dedicated Full Stack .NET Developer with extensive experience in building robust and scalable web applications. My expertise lies in backend development using .NET Core and Entity Framework, ensuring efficient data management and seamless integration. I also excel in creating RESTful APIs to facilitate smooth communication between different parts of the application and third-party services. On the frontend, I develop responsive and user-friendly interfaces using HTML, CSS, and JavaScript without relying on frontend frameworks, ensuring lightweight and fast-loading pages. My goal is to deliver high-quality software solutions that meet client needs and exceed expectations.</p>
-        <a href="https://drive.google.com/file/d/1wAompgCme_Oci2CVlIK7LSnv_S3QYfwQ/view?usp=sharing" class="cta">Download Resume</a>
+
+      <!-- Email -->
+      <div class="contact-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/new-post.png" /></div>
+        <div class="contact-info">
+          <h1>Email</h1>
+          <h2>ali.320230101@ejust.edu.eg</h2>
+          <h2>alihmdy135@gmail.com</h2>
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div class="contact-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/map-marker.png" /></div>
+        <div class="contact-info">
+          <h1>Address</h1>
+          <h2>Egypt, Cairo, Dar Elsalam</h2>
+        </div>
+      </div>
+
+      <!-- LinkedIn -->
+      <div class="contact-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/linkedin.png" /></div>
+        <div class="contact-info">
+          <h1>LinkedIn</h1>
+          <h2><a href="https://www.linkedin.com/in/ali-hamdi-3b4a20355/" target="_blank" rel="noopener noreferrer">Ali Hamdy linkedIn</a></h2>
+        </div>
+      </div>
+
+      <!-- GitHub -->
+      <div class="contact-item">
+        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/github.png" /></div>
+        <div class="contact-info">
+          <h1>GitHub</h1>
+          <h2><a href="https://github.com/alihamdy135" target="_blank" rel="noopener noreferrer">Ali Hamdy Github</a></h2>
+        </div>
       </div>
     </div>
-  </section>
-  <!-- End About Section -->
-
-  <!-- Contact Section -->
-  <section id="contact">
-    <div class="contact container">
-      <div>
-        <h1 class="section-title">Contact <span>info</span></h1>
-      </div>
-      <div class="contact-items">
-        <div class="contact-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/phone.png" /></div>
-          <div class="contact-info">
-            <h1>Phone</h1>
-            <h2>+201123983683</h2>
-            <h2>+201099531327</h2>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/new-post.png" /></div>
-          <div class="contact-info">
-            <h1>Email</h1>
-            <h2>ali.320230101@ejust.edu.eg</h2>
-            <h2>alihmdy135@gmail.com</h2>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/map-marker.png" /></div>
-          <div class="contact-info">
-            <h1>Address</h1>
-            <h2>Egypt ,Cairo ,Dar Elsalam</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- End Contact Section -->
+  </div>
+</section>
+<!-- End Contact Section -->
 
   <!-- Footer -->
   <section id="footer">
