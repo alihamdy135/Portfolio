@@ -1,458 +1,880 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <!-- Font Awesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <title>My Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali Hamdy | Full Stack Flutter & .NET Developer</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#006b5c",
+                        "primary-container": "#00bfa6",
+                        "primary-light": "#e8f8f5",
+                        surface: "#f9f9f9",
+                        "surface-low": "#f3f3f4",
+                        "surface-container": "#eeeeee",
+                        "on-surface": "#1a1c1c",
+                        "on-surface-variant": "#3c4a46",
+                        "outline-variant": "#bbcac5",
+                    },
+                    fontFamily: {
+                        satoshi: ["Satoshi", "Manrope", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                        mono: ["JetBrains Mono", "monospace"],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #fff; color: #1a1c1c; }
+        
+        .gradient-primary { background: linear-gradient(135deg, #006b5c 0%, #00bfa6 100%); }
+        
+        .ghost-shadow { box-shadow: 0 8px 40px rgba(0, 191, 166, 0.08); }
+        
+        .section-padding { padding-top: clamp(64px, 8vw, 120px); padding-bottom: clamp(64px, 8vw, 120px); }
+        
+        .editorial-label {
+            color: #00bfa6; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.5rem;
+            text-transform: uppercase;
+        }
+        
+        /* Pulsing green dot */
+        .dot-pulse {
+            width: 8px; height: 8px; background: #10b981; border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+        @keyframes pulse-dot {
+            0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(16,185,129,0); }
+            100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+        }
+        
+        /* Tech icons: grayscale by default, color on hover */
+        .dev-icon { width: 22px; height: 22px; filter: grayscale(1) opacity(0.6); transition: filter 0.3s; }
+        .dev-icon:hover, .skill-row:hover .dev-icon { filter: grayscale(0) opacity(1); }
+        
+        /* Scroll reveal animation */
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        
+        /* Typewriter cursor */
+        .cursor-blink { animation: blink 1s step-end infinite; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+        
+        /* Teal tag pill */
+        .tag-pill {
+            background: #e8f8f5; color: #007a69; border-radius: 9999px;
+            font-size: 11px; font-weight: 700; padding: 3px 10px;
+            display: inline-block;
+        }
+        
+        /* Timeline left line */
+        .timeline-line {
+            position: relative; padding-left: 2rem;
+        }
+        .timeline-line::before {
+            content: ''; position: absolute; left: 0; top: 8px; bottom: 0;
+            width: 2px; background: #eeeeee;
+        }
+        .timeline-dot {
+            position: absolute; left: -6px; top: 6px;
+            width: 14px; height: 14px; border-radius: 50%;
+            background: #006b5c; border: 3px solid #fff;
+        }
+        
+        /* Project card hover */
+        .project-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 48px rgba(0,191,166,0.14);
+        }
+        
+        /* Nav active link */
+        .nav-link { color: #64748b; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+        .nav-link:hover, .nav-link.active { color: #00bfa6; }
+        .nav-link.active { font-weight: 700; border-bottom: 2px solid #00bfa6; padding-bottom: 2px; }
+        
+        /* Input focus ring */
+        input:focus, textarea:focus {
+            outline: none; border-color: #00bfa6;
+            box-shadow: 0 0 0 3px rgba(0,191,166,0.15);
+        }
+    </style>
 </head>
+<body class="antialiased relative">
 
-<body>
-  <!-- Header -->
-  <section id="header">
-    <div class="header container">
-      <div class="nav-bar">
-        <div class="brand">
-          <a href="#hero">
-            <h1><span>A</span>li <span>H</span>amdy</h1>
-          </a>
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-[#f0f0f0]">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="font-satoshi font-bold text-xl text-on-surface">Ali Hamdy</div>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="nav-link font-satoshi">About</a>
+                <a href="#projects" class="nav-link font-satoshi">Projects</a>
+                <a href="#experience" class="nav-link font-satoshi">Experience</a>
+                <a href="#skills" class="nav-link font-satoshi">Skills</a>
+                <a href="#contact" class="nav-link font-satoshi">Contact</a>
+            </div>
+            
+            <div class="hidden md:block">
+                <a href="#contact" class="gradient-primary text-white rounded-lg px-5 py-2 font-satoshi font-bold text-sm shadow-md hover:shadow-lg transition-shadow">Hire Me</a>
+            </div>
+
+            <button id="mobile-menu-btn" aria-expanded="false" class="md:hidden text-on-surface p-2">
+                <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
         </div>
-        <div class="nav-list">
-          <div class="hamburger">
-            <div class="bar"></div>
-          </div>
-          <ul>
-            <li><a href="#hero" data-after="Home">Home</a></li>
-            <li><a href="#services" data-after="Service">Services</a></li>
-            <li><a href="#projects" data-after="Projects">Projects</a></li>
-            <li><a href="#about" data-after="About">About</a></li>
-            <li><a href="#contact" data-after="Contact">Contact</a></li>
-          </ul>
+
+        <div id="mobile-menu" class="hidden absolute top-20 left-0 right-0 bg-white shadow-lg border-t border-surface-container flex-col py-4 px-6 gap-4 md:hidden">
+            <a href="#about" class="nav-link font-satoshi block py-2">About</a>
+            <a href="#projects" class="nav-link font-satoshi block py-2">Projects</a>
+            <a href="#experience" class="nav-link font-satoshi block py-2">Experience</a>
+            <a href="#skills" class="nav-link font-satoshi block py-2">Skills</a>
+            <a href="#contact" class="nav-link font-satoshi block py-2">Contact</a>
+            <a href="#contact" class="gradient-primary text-white rounded-lg px-5 py-3 font-satoshi font-bold text-center mt-2">Hire Me</a>
         </div>
-      </div>
+    </nav>
+
+    <section class="relative min-h-screen bg-white flex items-center pt-20 overflow-hidden">
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary rounded-full opacity-10 blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            
+            <div class="flex flex-col gap-6 z-10">
+                <div class="flex items-center gap-4">
+                    <span class="editorial-label">—— WELCOME</span>
+                    <div class="flex items-center gap-2 bg-[#e8f8f5] px-3 py-1 rounded-full border border-[#00bfa6]/20">
+                        <div class="dot-pulse"></div>
+                        <span class="text-[#007a69] text-[10px] font-bold uppercase tracking-wider">Available for new projects</span>
+                    </div>
+                </div>
+                
+                <h1 class="font-satoshi text-6xl md:text-7xl font-extrabold tracking-tighter text-on-surface">
+                    Hi, I'm <span class="text-primary">Ali Hamdy</span>
+                </h1>
+                
+                <p class="font-satoshi text-2xl md:text-3xl text-on-surface-variant">
+                    I build things for <span id="hero-rotator" class="text-primary font-bold transition-opacity duration-300">Flutter Apps</span><span class="cursor-blink text-primary">|</span>
+                </p>
+                
+                <p class="text-slate-500 text-lg max-w-md leading-relaxed">
+                    Full Stack Developer specializing in Flutter, .NET Core MVC, and IoT systems. I bridge the gap between hardware prototyping, AI models, and scalable digital interfaces while mentoring the next generation of coders.
+                </p>
+                
+                <div class="flex flex-wrap gap-4 mt-4">
+                    <a href="#contact" class="gradient-primary text-white font-satoshi font-bold px-8 py-4 rounded-lg ghost-shadow hover:scale-105 transition-transform text-center">Contact Me</a>
+                    <a href="#projects" class="border-2 border-primary-container text-primary font-satoshi font-bold px-8 py-4 rounded-lg hover:bg-primary-light transition-colors text-center">View Projects</a>
+                </div>
+            </div>
+
+            <div class="hidden md:block justify-self-end z-10 relative">
+                <div class="bg-white border border-surface-container ghost-shadow rounded-2xl p-8 w-[340px]">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-[80px] h-[80px] rounded-full border-2 border-primary flex items-center justify-center bg-primary-light text-primary font-satoshi font-extrabold text-3xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-full h-full p-2">
+                                <circle cx="50" cy="50" r="48" fill="#e8f8f5" />
+                                <text x="50" y="65" font-family="Satoshi, sans-serif" font-weight="800" font-size="45" fill="#006b5c" text-anchor="middle">A</text>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-satoshi font-bold text-lg text-on-surface">Ali Hamdy</h3>
+                            <p class="text-sm text-slate-500">Full Stack / Embedded</p>
+                        </div>
+                    </div>
+                    
+                    <hr class="border-surface-container mb-4">
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">Core Stack</p>
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-surface-low border border-surface-container rounded-xl p-3 flex items-center gap-2 hover:bg-white transition-colors cursor-default skill-row">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" class="dev-icon">
+                            <span class="text-xs font-bold text-on-surface-variant">Flutter</span>
+                        </div>
+                        <div class="bg-surface-low border border-surface-container rounded-xl p-3 flex items-center gap-2 hover:bg-white transition-colors cursor-default skill-row">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" alt=".NET" class="dev-icon">
+                            <span class="text-xs font-bold text-on-surface-variant">.NET Core</span>
+                        </div>
+                        <div class="bg-surface-low border border-surface-container rounded-xl p-3 flex items-center gap-2 hover:bg-white transition-colors cursor-default skill-row">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C/C++" class="dev-icon">
+                            <span class="text-xs font-bold text-on-surface-variant">C / C++</span>
+                        </div>
+                        <div class="bg-surface-low border border-surface-container rounded-xl p-3 flex items-center gap-2 hover:bg-white transition-colors cursor-default skill-row">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino" class="dev-icon">
+                            <span class="text-xs font-bold text-on-surface-variant">Embedded</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <div class="bg-surface-low border-y border-surface-container py-12 relative z-10">
+        <div class="max-w-[1100px] mx-auto px-8 grid grid-cols-3 text-center">
+            <div class="border-r border-surface-container reveal">
+                <div class="font-satoshi font-extrabold text-4xl text-on-surface mb-1">
+                    <span class="counter" data-target="4">0</span>+
+                </div>
+                <div class="text-xs uppercase tracking-widest text-slate-500 font-bold">Years Experience</div>
+            </div>
+            <div class="border-r border-surface-container reveal" data-delay="100">
+                <div class="font-satoshi font-extrabold text-4xl text-on-surface mb-1">
+                    <span class="counter" data-target="20">0</span>+
+                </div>
+                <div class="text-xs uppercase tracking-widest text-slate-500 font-bold">Projects Completed</div>
+            </div>
+            <div class="reveal" data-delay="200">
+                <div class="font-satoshi font-extrabold text-4xl text-on-surface mb-1">
+                    <span class="counter" data-target="15">0</span>+
+                </div>
+                <div class="text-xs uppercase tracking-widest text-slate-500 font-bold">Technologies</div>
+            </div>
+        </div>
     </div>
-  </section>
-  <!-- End Header -->
 
-  <!-- Hero Section -->
-  <section id="hero">
-    <div class="hero container">
-      <div>
-        <h1>Hello, <span></span></h1>
-        <h1>My Name is <span></span></h1>
-        <h1>Ali <span></span></h1>
-        <a href="#projects" type="button" class="cta">Portfolio</a>
-      </div>
-    </div>
-  </section>
-  <!-- End Hero Section -->
+    <section id="about" class="bg-white section-padding">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-10">
+                <span class="editorial-label">—— ABOUT ME</span>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div class="reveal">
+                    <h2 class="font-satoshi text-4xl font-extrabold tracking-tight text-on-surface mb-6">Crafting software with precision & purpose.</h2>
+                    <div class="flex flex-col gap-4 text-slate-600 text-lg leading-relaxed">
+                        <p>I'm a developer who obsesses over the details most people ignore. From designing highly responsive Flutter interfaces that scale gracefully to architecting robust IoT hardware integrations with C/C++ — I believe code should be as functional as the problem it solves.</p>
+                        <p>Currently studying Computer Science and Cyber Security at E-JUST (Egypt-Japan University of Science & Technology) and working as a Programming & Math Instructor at iSchool. Fluent in Arabic and working towards my English C2 and Japanese N3 goals, I collaborate effectively across multidisciplinary tech teams. Whether training YOLO AI models for computer vision or building solid .NET backend architectures, I maintain a strong commitment to continuous growth.</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 reveal" data-delay="200">
+                    <div class="bg-surface border border-surface-container rounded-2xl p-6 hover:bg-white hover:shadow-md transition-all">
+                        <span class="material-symbols-outlined text-primary text-3xl mb-3 block">memory</span>
+                        <h4 class="font-satoshi font-bold text-on-surface mb-2">IoT Integration</h4>
+                        <p class="text-sm text-slate-500">Expertise in Arduino, NodeMCU, ESP32, and custom sensor network deployment.</p>
+                    </div>
+                    <div class="bg-surface border border-surface-container rounded-2xl p-6 hover:bg-white hover:shadow-md transition-all">
+                        <span class="material-symbols-outlined text-primary text-3xl mb-3 block">smartphone</span>
+                        <h4 class="font-satoshi font-bold text-on-surface mb-2">Cross-Platform</h4>
+                        <p class="text-sm text-slate-500">Building pixel-perfect, highly responsive mobile apps utilizing Flutter and Dart.</p>
+                    </div>
+                    <div class="bg-surface border border-surface-container rounded-2xl p-6 hover:bg-white hover:shadow-md transition-all">
+                        <span class="material-symbols-outlined text-primary text-3xl mb-3 block">dns</span>
+                        <h4 class="font-satoshi font-bold text-on-surface mb-2">Backend Architecture</h4>
+                        <p class="text-sm text-slate-500">Developing scalable infrastructure utilizing .NET Core MVC, SQL Server, and Firebase.</p>
+                    </div>
+                    <div class="bg-surface border border-surface-container rounded-2xl p-6 hover:bg-white hover:shadow-md transition-all">
+                        <span class="material-symbols-outlined text-primary text-3xl mb-3 block">school</span>
+                        <h4 class="font-satoshi font-bold text-on-surface mb-2">Mentorship</h4>
+                        <p class="text-sm text-slate-500">Fostering engineering foundations by teaching programming to the next generation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- About Section -->
-  <section id="about">
-    <div class="about container">
-      <div class="col-left">
-        <div class="about-img">
-          <img src="img-2.jpg" alt="img">
-        </div>
-      </div>
-      <div class="col-right">
-        <h1 class="section-title">About <span>me</span></h1>
-        <h2>Full-Stack Developer| Flutter | .NET Core MVC | Programming & Math Instructor</h2>
-        <p>I am a Full-Stack Developer with expertise in .NET Core MVC for backend systems and Flutter for building dynamic mobile applications. I leverage Firebase for real-time databases, authentication, and cloud integration to deliver modern, scalable solutions. Beyond development, I am a dedicated Programming & Math Instructor, teaching coding and problem-solving skills to students. My work is driven by a passion for innovation, precision, and continuous learning. Whether developing cutting-edge applications or mentoring aspiring developers, I strive to create impactful, user-centric solutions and inspire others to excel in tech.</p>
-        <a href="https://drive.google.com/drive/folders/1FvwMApFRxnPqQn5Rr10KKPTLK202pNBZ?usp=sharing" class="cta">Download Resume</a>
-      </div>
-    </div>
-  </section>
-  <!-- End About Section -->
-<!-- Skills Section -->
-<section id="skills">
-  <div class="skills container">
-    <h1 class="section-title">Tech <span>Skills</span></h1>
-    <div class="skills-grid">
-      <!-- Row 1 -->
-      <div class="skill-row">
-        <div class="skill-item">
-          <img src="flutter.png" alt="Flutter Icon" class="skill-icon">
-          <p>Flutter</p>
-        </div>
-        <div class="skill-item">
-          <img src="dart.png" alt="Dart Icon" class="skill-icon">
-          <p>Dart</p>
-        </div>
-        <div class="skill-item">
-          <i class="fas fa-fire"></i>
-          <p>Firebase</p>
-        </div>
-        <div class="skill-item">
-          <i class="fab fa-microsoft"></i>
-          <p>ASP.NET MVC</p>
-        </div>
-        <div class="skill-item">
-          <i class="fas fa-database"></i>
-          <p>Entity Framework</p>
-        </div>
-      </div>
-      <!-- Row 2 -->
-      <div class="skill-row">
-        <div class="skill-item">
-          <i class="fas fa-database"></i>
-          <p>SQL Server</p>
-        </div>
-        <div class="skill-item">
-          <i class="fab fa-microsoft"></i>
-          <p>C#</p>
-        </div>
-        <div class="skill-item">
-          <i class="fab fa-html5"></i>
-          <p>HTML</p>
-        </div>
-        <div class="skill-item">
-          <i class="fab fa-css3-alt"></i>
-          <p>CSS</p>
-        </div>
-        <div class="skill-item">
-          <i class="fab fa-js-square"></i>
-          <p>JavaScript</p>
-        </div>
-      </div>
-      <!-- Row 3 -->
-      <div class="skill-row">
-        <div class="skill-item">
-          <i class="fas fa-code"></i>
-          <p>C++</p>
-        </div>
-        <div class="skill-item">
-          <i class="fas fa-microchip"></i>
-          <p>Arduino</p>
-        </div>
-        <div class="skill-item">
-          <i class="fas fa-robot"></i>
-          <p>ROS</p>
-        </div>
-        <div class="skill-item">
-          <i class="fas fa-eye"></i>
-          <p>OpenCV</p>
-        </div>
-        <div class="skill-item">
-          <i class="fas fa-file-excel"></i>
-          <p>Microsoft Office</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End Skills Section -->
-<!-- Service Section -->
-<section id="services">
-  <div class="services container">
-    <div class="service-top">
-      <h1 class="section-title">Serv<span>i</span>ces</h1>
-      <p>As a Full-Stack Developer and Programming & Math Instructor, I offer a wide range of services to help businesses and individuals achieve their goals. Below are the key services I provide:</p>
-    </div>
-    <div class="service-bottom">
-      <!-- Web Development Services -->
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Web Development</h2>
-        <p>Build scalable and secure web applications using <strong>.NET Core MVC</strong> and modern frontend technologies (HTML, CSS, JavaScript). Develop RESTful APIs for seamless integration.</p>
-      </div>
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>E-commerce Solutions</h2>
-        <p>Create feature-rich e-commerce platforms with payment gateway integration, user authentication, and product management.</p>
-      </div>
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Content Management Systems</h2>
-        <p>Develop custom CMS solutions tailored to client needs for easy content updates and management.</p>
-      </div>
+    <section id="projects" class="bg-surface-low section-padding">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-12 reveal">
+                <span class="editorial-label">—— PROJECTS</span>
+                <h2 class="font-satoshi text-4xl font-extrabold tracking-tight mt-4 text-on-surface">Selected Full Stack Work</h2>
+                <p class="text-slate-500 mt-2 text-lg">A showcase of embedded systems, AI, and mobile development.</p>
+            </div>
 
-      <!-- Mobile App Development Services -->
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Mobile App Development</h2>
-        <p>Build dynamic and responsive cross-platform mobile applications using <strong>Flutter</strong> and integrate <strong>Firebase</strong> for real-time databases and authentication.</p>
-      </div>
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Custom Mobile Solutions</h2>
-        <p>Develop mobile apps for specific industries (e.g., healthcare, education, finance) with tailored features and functionalities.</p>
-      </div>
+            <div class="bg-white rounded-2xl border border-surface-container ghost-shadow overflow-hidden flex flex-col md:flex-row mb-12 reveal">
+                
+                <div class="w-full md:w-[60%] bg-primary/20 p-6 md:p-8 flex items-center justify-center min-h-[400px]">
+                    <div class="w-full max-w-lg bg-white rounded-xl shadow-2xl overflow-hidden border border-slate-200">
+                        <div class="bg-slate-800 px-4 py-3 flex items-center gap-4">
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-[#ff5f57]"></div>
+                                <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                                <div class="w-3 h-3 rounded-full bg-[#28ca41]"></div>
+                            </div>
+                            <div class="bg-slate-700 rounded text-slate-400 text-xs px-3 py-1 flex-1 text-center font-mono">
+                                traffic-monitor.sys
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 bg-slate-50">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="font-satoshi font-bold text-slate-800">Live Intersection Dashboard</h4>
+                                <span class="bg-red-100 text-red-600 text-[10px] font-bold px-2 py-1 rounded-full animate-pulse">LIVE SOT FEED</span>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div class="bg-slate-100 rounded-lg p-3 border border-slate-200">
+                                    <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wide mb-2">Camera A (SOT)</p>
+                                    <div class="bg-slate-800 h-24 rounded flex items-center justify-center relative overflow-hidden mb-2">
+                                        <div class="absolute w-12 h-16 border-2 border-green-400 border-dashed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+                                        <span class="text-green-400 text-[8px] absolute top-1 left-1 font-mono">TRACKING ID: 01 (EMB)</span>
+                                    </div>
+                                    <div class="bg-white rounded shadow-sm p-2 text-xs text-slate-700 border-l-2 border-red-500 font-medium">
+                                        Priority: AMBULANCE
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-slate-100 rounded-lg p-3 border border-slate-200">
+                                    <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wide mb-2">Intersection Stats</p>
+                                    <div class="bg-white rounded shadow-sm p-3 mb-2 text-center">
+                                        <p class="text-[10px] text-slate-500">Current Car Count</p>
+                                        <p class="text-2xl font-satoshi font-bold text-slate-800">42</p>
+                                    </div>
+                                    <div class="bg-white rounded shadow-sm p-3 text-center">
+                                        <p class="text-[10px] text-slate-500">Congestion Status</p>
+                                        <p class="text-sm font-bold text-orange-500">HIGH</p>
+                                    </div>
+                                </div>
 
-      <!-- Backend Development Services -->
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>API Development</h2>
-        <p>Design and develop RESTful APIs using <strong>.NET Core</strong> for seamless communication between frontend and backend systems.</p>
-      </div>
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Database Management</h2>
-        <p>Set up and manage databases using <strong>SQL Server</strong> or <strong>Firebase</strong> for efficient data storage and retrieval.</p>
-      </div>
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Cloud Integration</h2>
-        <p>Integrate cloud services like <strong>Firebase</strong>, <strong>Azure</strong>, or <strong>AWS</strong> for scalable and reliable backend solutions.</p>
-      </div>
+                                <div class="bg-slate-100 rounded-lg p-3 border border-slate-200">
+                                    <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wide mb-2">Signal Override</p>
+                                    <div class="bg-white rounded shadow-sm p-2 text-xs text-slate-700 border-l-2 border-green-500 mb-2">
+                                        North-South: GREEN
+                                    </div>
+                                    <div class="bg-white rounded shadow-sm p-2 text-xs text-slate-700 border-l-2 border-red-500 mb-2">
+                                        East-West: RED
+                                    </div>
+                                    <div class="bg-red-50 text-red-700 border border-red-200 rounded p-2 text-[10px] font-bold text-center mt-4">
+                                        EMERGENCY PREEMPTION ACTIVE
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-      <!-- Real-Time Applications -->
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Real-Time Chat Applications</h2>
-        <p>Develop real-time chat apps using <strong>Firebase</strong> for instant messaging and notifications.</p>
-      </div>
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Collaboration Tools</h2>
-        <p>Build collaborative platforms (e.g., project management tools, online whiteboards) with real-time updates.</p>
-      </div>
+                <div class="w-full md:w-[40%] p-10 flex flex-col justify-center gap-4 bg-white">
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag-pill">Flutter</span>
+                        <span class="tag-pill">YOLOv8</span>
+                        <span class="tag-pill">Arduino</span>
+                        <span class="tag-pill">Computer Vision</span>
+                    </div>
+                    <h3 class="font-satoshi font-extrabold text-2xl text-on-surface">Smart Traffic & Emergency System</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        An integrated prototype utilizing AI cameras and ultrasonic sensors. Features a custom Single-Object Tracking (SOT) model to identify and prioritize emergency vehicles, triggering signal overrides while feeding live car counts and congestion states to a mobile admin interface.
+                    </p>
+                    <div class="flex items-center gap-4 mt-4">
+                        <button class="gradient-primary text-white font-satoshi font-bold px-6 py-2 rounded-lg text-sm transition-transform hover:scale-105">View Architecture →</button>
+                        <a href="https://github.com/alihamdy135" target="_blank" class="border border-surface-container text-on-surface-variant font-satoshi font-bold px-6 py-2 rounded-lg text-sm hover:bg-surface-low transition-colors flex items-center gap-2">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="w-4 h-4 dev-icon" alt="GitHub"> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-      <!-- Teaching and Mentoring Services -->
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Programming Instruction</h2>
-        <p>Teach programming languages like <strong>C#</strong>, <strong>Dart</strong>, and <strong>JavaScript</strong>, as well as frameworks like <strong>.NET Core</strong> and <strong>Flutter</strong>.</p>
-      </div>
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Math Tutoring</h2>
-        <p>Provide math tutoring for students, focusing on problem-solving and logical thinking skills.</p>
-      </div>
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Coding Bootcamps</h2>
-        <p>Organize coding bootcamps to help beginners learn full-stack development or mobile app development.</p>
-      </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div class="project-card bg-white rounded-xl border-t-4 border-primary-container ghost-shadow p-8 reveal" data-delay="100">
+                    <div class="h-24 bg-surface rounded-lg mb-6 flex items-center justify-center p-4 border border-surface-container">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-green-500 text-3xl">storefront</span>
+                            <span class="material-symbols-outlined text-blue-500 text-3xl">shopping_cart_checkout</span>
+                            <span class="material-symbols-outlined text-purple-500 text-3xl">payments</span>
+                        </div>
+                    </div>
+                    <h4 class="font-satoshi font-bold text-lg text-on-surface mb-2">E-Commerce Platform</h4>
+                    <p class="text-sm text-slate-500 mb-4 h-20">Full-stack electronics store platform featuring product management, secure cart transactions, and a fully responsive interface.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tag-pill">.NET Core</span>
+                        <span class="tag-pill">SQL Server</span>
+                        <span class="tag-pill">Entity Framework</span>
+                    </div>
+                    <a href="https://github.com/alihamdy135/Ecommerce" target="_blank" class="text-primary font-bold text-sm hover:underline">View Project →</a>
+                </div>
 
-      <!-- Consultation and Training -->
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Tech Consultation</h2>
-        <p>Offer consultation services to businesses for choosing the right tech stack and architecture for their projects.</p>
-      </div>
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Team Training</h2>
-        <p>Train development teams on <strong>.NET Core</strong>, <strong>Flutter</strong>, and <strong>Firebase</strong> to enhance their skills and productivity.</p>
-      </div>
+                <div class="project-card bg-white rounded-xl border-t-4 border-primary-container ghost-shadow p-8 reveal" data-delay="200">
+                    <div class="h-24 bg-slate-900 rounded-lg mb-6 p-3 overflow-hidden border border-slate-700">
+                        <pre class="text-green-400 font-mono text-[9px] leading-tight">
+<span class="text-blue-400">Future</span>&lt;Diagnosis&gt; analyzeBreathData() <span class="text-purple-400">async</span> {
+  <span class="text-orange-400">final</span> data = <span class="text-purple-400">await</span> sensorApi.getVocLevels();
+  <span class="text-orange-400">if</span> (data.co_ppm > threshold) {
+    <span class="text-purple-400">return</span> MLModel.predict(data);
+  }
+}
+                        </pre>
+                    </div>
+                    <h4 class="font-satoshi font-bold text-lg text-on-surface mb-2">Lung Cancer DB Sys</h4>
+                    <p class="text-sm text-slate-500 mb-4 h-20">A diagnostic mobile application leveraging breath analysis data. Visualizes VOCs and physiological monitoring stats for early detection.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tag-pill">Dart</span>
+                        <span class="tag-pill">Biomedical Analysis</span>
+                        <span class="tag-pill">Firebase</span>
+                    </div>
+                    <a href="https://github.com/alihamdy135" target="_blank" class="text-primary font-bold text-sm hover:underline">View Project →</a>
+                </div>
 
-      <!-- Freelance Projects -->
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Freelance Development</h2>
-        <p>Take on freelance projects for web and mobile app development, backend systems, and API integrations.</p>
-      </div>
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Project Rescue</h2>
-        <p>Help clients fix or improve existing projects by debugging, optimizing, and adding new features.</p>
-      </div>
+                <div class="project-card bg-white rounded-xl border-t-4 border-primary-container ghost-shadow p-8 reveal" data-delay="300">
+                    <div class="h-24 bg-surface rounded-lg mb-6 grid grid-cols-2 gap-2 p-2 border border-surface-container">
+                        <div class="bg-red-100 rounded flex items-center justify-center"><span class="material-symbols-outlined text-red-500 text-lg">warning</span></div>
+                        <div class="bg-green-100 rounded flex items-center justify-center"><span class="material-symbols-outlined text-green-500 text-lg">check_circle</span></div>
+                        <div class="bg-blue-100 rounded flex items-center justify-center"><span class="material-symbols-outlined text-blue-500 text-lg">policy</span></div>
+                        <div class="bg-yellow-100 rounded flex items-center justify-center"><span class="material-symbols-outlined text-yellow-600 text-lg">history</span></div>
+                    </div>
+                    <h4 class="font-satoshi font-bold text-lg text-on-surface mb-2">OSHA Safety App</h4>
+                    <p class="text-sm text-slate-500 mb-4 h-20">Compliance and health management system designed for educational institutions. Facilitates real-time incident reporting and safety audits.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tag-pill">Flutter</span>
+                        <span class="tag-pill">UI/UX Design</span>
+                        <span class="tag-pill">Data Collection</span>
+                    </div>
+                    <a href="https://github.com/alihamdy135" target="_blank" class="text-primary font-bold text-sm hover:underline">View Project →</a>
+                </div>
 
-      <!-- Specialized Services -->
-      <div class="service-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-        <h2>Authentication Systems</h2>
-        <p>Implement secure authentication systems using <strong>Firebase Authentication</strong> or <strong>JWT</strong> for web and mobile apps.</p>
-      </div>
-      
-    </div>
-  </div>
-</section>
-<!-- End Service Section -->
+            </div>
+        </div>
+    </section>
 
-<!-- Projects Section -->
-<section id="projects">
-  <div class="projects container">
-    <div class="projects-header">
-      <h1 class="section-title">Recent <span>Projects</span></h1>
-    </div>
-    <div class="all-projects">
-      <!-- Project 1: E-commerce Website -->
-      <div class="project-item">
-        <div class="project-info">
-          <h1>E-commerce Website</h1>
-          <h2>Full-Stack Development</h2>
-          <p>Our E-commerce website specializes in electronics devices, providing a seamless online shopping experience. We offer a wide range of products including smartphones, laptops, tablets, and accessories. Built with <strong>.NET Core</strong> and <strong>Entity Framework</strong>, it ensures robust backend support for efficient data management and secure transactions. The frontend is designed using <strong>HTML</strong>, <strong>CSS</strong>, and <strong>JavaScript</strong>, delivering a responsive and user-friendly interface. Features include product search, user authentication, shopping cart, order management, and payment gateway integration, all aimed at providing a comprehensive and enjoyable shopping experience for users.</p>
-        </div>
-        <div class="project-img">
-          <img src="img-1.png" alt="E-commerce Website">
-        </div>
-      </div>
+    <section id="experience" class="bg-white section-padding">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
+            
+            <div>
+                <span class="editorial-label mb-8">—— EXPERIENCE</span>
+                <div class="flex flex-col gap-8">
 
-      <!-- Project 2: English Language Learning App -->
-      <div class="project-item">
-        <div class="project-info">
-          <h1>English Language Learning App</h1>
-          <h2>Flutter & Firebase</h2>
-          <p>Developed a project using the <strong>Flutter</strong> framework and <strong>Firebase</strong> to facilitate the learning of the English language. The app provides interactive lessons, quizzes, and progress tracking to help users improve their language skills.</p>
-        </div>
-        <div class="project-img">
-          <img src="img-4.jpg" alt="English Language Learning App">
-        </div>
-      </div>
+                    <div class="timeline-line reveal">
+                        <div class="timeline-dot"></div>
+                        <h4 class="font-satoshi font-bold text-xl text-on-surface">Instructor</h4>
+                        <p class="text-primary font-bold text-sm mb-2">iSchool | Oct 2023 — Present</p>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                            Teaching young learners programming languages and robotics, fostering creativity, and mentoring them to build games and applications. Developing curriculum strategies to simplify complex logic concepts.
+                        </p>
+                        <div class="flex gap-2">
+                            <span class="tag-pill">Programming</span>
+                            <span class="tag-pill">Mentoring</span>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-line reveal" data-delay="100">
+                        <div class="timeline-dot"></div>
+                        <h4 class="font-satoshi font-bold text-xl text-on-surface">Freelance Full Stack Developer</h4>
+                        <p class="text-primary font-bold text-sm mb-2">Independent | 2022 — Present</p>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                            Delivering end-to-end, cross-platform mobile solutions and scalable .NET backends. Handled full lifecycles for over 20 embedded and mobile projects. Implemented MLOps practices into real-world data pipelines and constructed comprehensive architecture for clients.
+                        </p>
+                        <div class="flex gap-2">
+                            <span class="tag-pill">Flutter</span>
+                            <span class="tag-pill">.NET Core</span>
+                            <span class="tag-pill">Firebase</span>
+                        </div>
+                    </div>
 
-      <!-- Project 3: Health Monitoring System -->
-      <div class="project-item">
-        <div class="project-info">
-          <h1>Health Monitoring System</h1>
-          <h2>Flutter, Firebase & ESP8266</h2>
-          <p>Created three projects connecting <strong>ESP8266</strong>, <strong>Firebase</strong>, and a <strong>Flutter</strong> app to assist individuals with ADHD, Congestive Heart Failure (CHF), and Chronic Obstructive Pulmonary Disease (COPD). The system analyzes sensor data to monitor and support their care needs, providing real-time insights and alerts.</p>
-        </div>
-        <div class="project-img">
-          <img src="img-5.png" alt="Health Monitoring System">
-        </div>
-      </div>
+                    <div class="timeline-line reveal" data-delay="200">
+                        <div class="timeline-dot"></div>
+                        <h4 class="font-satoshi font-bold text-xl text-on-surface">Robotics Club Mentor</h4>
+                        <p class="text-primary font-bold text-sm mb-2">E-JUST | Dec 2024 — Present</p>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                            Guiding university students in fundamental electronics, embedded programming, circuit design, and sensor integration using Tinkercad and physical microcontrollers. Conducting technical workshops to foster engineering foundations.
+                        </p>
+                        <div class="flex gap-2">
+                            <span class="tag-pill">Arduino</span>
+                            <span class="tag-pill">ROS</span>
+                        </div>
+                    </div>
 
-      <!-- Project 4: Python Learning App -->
-      <div class="project-item">
-        <div class="project-info">
-          <h1>Python Learning App</h1>
-          <h2>Flutter & Firebase</h2>
-          <p>Developed a project using the <strong>Flutter</strong> framework and <strong>Firebase</strong> to facilitate structured learning of the Python language across three proficiency levels. The app includes interactive coding exercises, quizzes, and progress tracking to help users master Python.</p>
-        </div>
-        <div class="project-img">
-          <img src="img-6.jpg" alt="Python Learning App">
-        </div>
-      </div>
+                </div>
+            </div>
 
-      <!-- Project 5: Greenhouse Monitoring and Control System -->
-      <div class="project-item">
-        <div class="project-info">
-          <h1>Greenhouse Monitoring and Control System</h1>
-          <h2>NodeMCU ESP8266 & Flutter</h2>
-          <p>This project aims to develop an automated system for monitoring and controlling environmental conditions within a greenhouse, utilizing a <strong>NodeMCU ESP8266</strong> microcontroller and a <strong>Flutter</strong>-based mobile application. The system collects data from sensors (e.g., temperature, humidity, soil moisture) and allows users to control actuators (e.g., fans, water pumps) remotely via the app.</p>
-        </div>
-        <div class="project-img">
-          <img src="img-7.png" alt="Greenhouse Monitoring and Control System">
-        </div>
-      </div>
+            <div>
+                <span class="editorial-label mb-8">—— EDUCATION</span>
+                <div class="flex flex-col gap-8">
+                    
+                    <div class="timeline-line reveal">
+                        <div class="timeline-dot"></div>
+                        <h4 class="font-satoshi font-bold text-xl text-on-surface">B.Sc. Computer Science & AI</h4>
+                        <p class="text-primary font-bold text-sm mb-2">E-JUST | Expected 2027</p>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                            Major in Cyber Security. High academic standing (Excellent). Extensive coursework in Data Structures, AI implementation, and System Architecture. Active participant in the E-JUST Robotics Club navigating autonomous systems and SLAM.
+                        </p>
+                        <div class="flex gap-2">
+                            <span class="tag-pill">Cyber Security</span>
+                            <span class="tag-pill">AI Models</span>
+                        </div>
+                    </div>
 
-      <!-- Project 6: Dairy Production Environmental Monitoring System -->
-      <div class="project-item">
-        <div class="project-info">
-          <h1>Dairy Production Environmental Monitoring System</h1>
-          <h2>NodeMCU ESP8266 & Flutter</h2>
-          <p>This project focuses on developing a comprehensive environmental monitoring system specifically tailored for dairy production facilities. It utilizes a <strong>NodeMCU ESP8266</strong> microcontroller and a <strong>Flutter</strong> mobile application to provide real-time data and alerts, with a strong emphasis on extended battery life for long-term deployment.</p>
-        </div>
-        <div class="project-img">
-          <img src="img-8.jpg" alt="Dairy Production Environmental Monitoring System">
-        </div>
-      </div>
+                    <div class="timeline-line reveal" data-delay="100">
+                        <div class="timeline-dot"></div>
+                        <h4 class="font-satoshi font-bold text-xl text-on-surface">Embedded Systems Training</h4>
+                        <p class="text-primary font-bold text-sm mb-2">Trainee | Jun 2023 — Aug 2023</p>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                            Intensive hands-on training focusing on Arduino and NodeMCU (ESP8266) implementations. Programmed complex real-time data acquisition tools, sensor integrations, and Wi-Fi data transmissions.
+                        </p>
+                        <div class="flex gap-2">
+                            <span class="tag-pill">C/C++</span>
+                            <span class="tag-pill">IoT</span>
+                        </div>
+                    </div>
 
-      <!-- Project 7: Coronary Artery Disease Monitoring System -->
-      <div class="project-item">
-        <div class="project-info">
-          <h1>Coronary Artery Disease Monitoring System</h1>
-          <h2>Flutter & Firebase</h2>
-          <p>This project aims to develop a system for monitoring patients with coronary artery disease who are at home rather than in a hospital setting. The system collects vital health data and provides real-time feedback to both the patient and potentially their healthcare providers, enabling better management of their condition.</p>
-        </div>
-        <div class="project-img">
-          <img src="img-9.jpg" alt="Coronary Artery Disease Monitoring System">
-        </div>
-      </div>
+                </div>
+            </div>
 
-      <!-- Project 8: Non-Invasive Lung Cancer Diagnosis System -->
-      <div class="project-item">
-        <div class="project-info">
-          <h1>Non-Invasive Lung Cancer Diagnosis System</h1>
-          <h2>Breath Analysis & Physiological Monitoring</h2>
-          <p>This project aims to develop a non-invasive system for lung cancer diagnosis using breath analysis and physiological monitoring. The system analyzes volatile organic compounds (VOCs) in exhaled breath, along with blood oxygen levels and carbon monoxide (CO) levels, to identify potential indicators of lung cancer.</p>
         </div>
-        <div class="project-img">
-          <img src="img-10.jpg" alt="Non-Invasive Lung Cancer Diagnosis System">
-        </div>
-      </div>
+    </section>
 
-      <!-- Project 9: OSHA-Compliant Safety and Health Management System -->
-      <div class="project-item">
-        <div class="project-info">
-          <h1>OSHA-Compliant Safety and Health Management System</h1>
-          <h2>Flutter Mobile Application</h2>
-          <p>This project aims to develop a comprehensive system that assesses and improves the safety and health management practices of educational institutions in accordance with <strong>OSHA (Occupational Safety and Health Administration)</strong> guidelines. The system is accessible through a user-friendly <strong>Flutter</strong> mobile application, enabling institutions to monitor and enhance their safety protocols effectively.</p>
-        </div>
-        <div class="project-img">
-          <img src="img-11.jpg" alt="OSHA-Compliant Safety and Health Management System">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End Projects Section -->
+    <section id="skills" class="bg-surface-low section-padding">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-12 reveal">
+                <span class="editorial-label">—— SKILLS & EXPERTISE</span>
+            </div>
 
-<!-- Contact Section -->
-<section id="contact">
-  <div class="contact container">
-    <div>
-      <h1 class="section-title">Contact <span>info</span></h1>
-    </div>
-    <div class="contact-items">
-      <!-- Phone -->
-      <div class="contact-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/phone.png" /></div>
-        <div class="contact-info">
-          <h1>Phone</h1>
-          <h2>+201123983683</h2>
-          <h2>+201099531327</h2>
-        </div>
-      </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="bg-white rounded-2xl border border-surface-container hover:shadow-lg p-8 transition-shadow reveal">
+                    <h4 class="font-satoshi font-bold text-lg text-on-surface mb-4 pb-2 border-b border-surface-container">Mobile App</h4>
+                    <div class="flex flex-col gap-4">
+                        <div class="skill-row flex items-center gap-3 text-sm font-medium text-slate-700">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" class="dev-icon"> Flutter
+                        </div>
+                        <div class="skill-row flex items-center gap-3 text-sm font-medium text-slate-700">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart" class="dev-icon"> Dart
+                        </div>
+                        <div class="skill-row flex items-center gap-3 text-sm font-medium text-slate-700">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" class="dev-icon"> Tailwind CSS
+                        </div>
+                    </div>
+                </div>
 
-      <!-- Email -->
-      <div class="contact-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/new-post.png" /></div>
-        <div class="contact-info">
-          <h1>Email</h1>
-          <h2>ali.320230101@ejust.edu.eg</h2>
-          <h2>alihmdy135@gmail.com</h2>
-        </div>
-      </div>
+                <div class="bg-white rounded-2xl border border-surface-container hover:shadow-lg p-8 transition-shadow reveal" data-delay="100">
+                    <h4 class="font-satoshi font-bold text-lg text-on-surface mb-4 pb-2 border-b border-surface-container">Backend / AI</h4>
+                    <div class="flex flex-col gap-4">
+                        <div class="skill-row flex items-center gap-3 text-sm font-medium text-slate-700">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" alt=".NET" class="dev-icon"> .NET Core MVC
+                        </div>
+                        <div class="skill-row flex items-center gap-3 text-sm font-medium text-slate-700">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" class="dev-icon"> C#
+                        </div>
+                        <div class="skill-row flex items-center gap-3 text-sm font-medium text-slate-700">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" class="dev-icon"> Firebase
+                        </div>
+                        <div class="skill-row flex items-center gap-3 text-sm font-medium text-slate-700">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" alt="OpenCV" class="dev-icon"> OpenCV / YOLO
+                        </div>
+                    </div>
+                </div>
 
-      <!-- Address -->
-      <div class="contact-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/map-marker.png" /></div>
-        <div class="contact-info">
-          <h1>Address</h1>
-          <h2>Egypt, Cairo, Dar Elsalam</h2>
-        </div>
-      </div>
+                <div class="bg-white rounded-2xl border border-surface-container hover:shadow-lg p-8 transition-shadow reveal" data-delay="200">
+                    <h4 class="font-satoshi font-bold text-lg text-on-surface mb-4 pb-2 border-b border-surface-container">Embedded</h4>
+                    <div class="flex flex-col gap-4">
+                        <div class="skill-row flex items-center gap-3 text-sm font-medium text-slate-700">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino" class="dev-icon"> Arduino
+                        </div>
+                        <div class="skill-row flex items-center gap-3 text-sm font-medium text-slate-700">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" class="dev-icon"> C / C++
+                        </div>
+                        <div class="skill-row flex items-center gap-3 text-sm font-medium text-slate-700">
+                            <span class="material-symbols-outlined text-slate-500 dev-icon">developer_board</span> NodeMCU / ESP
+                        </div>
+                        <div class="skill-row flex items-center gap-3 text-sm font-medium text-slate-700">
+                            <span class="material-symbols-outlined text-slate-500 dev-icon">smart_toy</span> ROS 1/2
+                        </div>
+                    </div>
+                </div>
 
-      <!-- LinkedIn -->
-      <div class="contact-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/linkedin.png" /></div>
-        <div class="contact-info">
-          <h1>LinkedIn</h1>
-          <h2><a href="https://www.linkedin.com/in/ali-hamdi-3b4a20355/" target="_blank" rel="noopener noreferrer">Ali Hamdy linkedIn</a></h2>
-        </div>
-      </div>
+                <div class="bg-white rounded-2xl border border-surface-container hover:shadow-lg p-8 transition-shadow reveal" data-delay="300">
+                    <h4 class="font-satoshi font-bold text-lg text-on-surface mb-4 pb-2 border-b border-surface-container">Tools & DB</h4>
+                    <div class="flex flex-col gap-4">
+                        <div class="skill-row flex items-center gap-3 text-sm font-medium text-slate-700">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL Server" class="dev-icon"> SQL Server
+                        </div>
+                        <div class="skill-row flex items-center gap-3 text-sm font-medium text-slate-700">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="dev-icon"> Git & GitHub
+                        </div>
+                        <div class="skill-row flex items-center gap-3 text-sm font-medium text-slate-700">
+                            <span class="material-symbols-outlined text-slate-500 dev-icon">architecture</span> Tinkercad
+                        </div>
+                        <div class="skill-row flex items-center gap-3 text-sm font-medium text-slate-700">
+                            <span class="material-symbols-outlined text-slate-500 dev-icon">language</span> Bilingual (AR/EN)
+                        </div>
+                    </div>
+                </div>
 
-      <!-- GitHub -->
-      <div class="contact-item">
-        <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/github.png" /></div>
-        <div class="contact-info">
-          <h1>GitHub</h1>
-          <h2><a href="https://github.com/alihamdy135" target="_blank" rel="noopener noreferrer">Ali Hamdy Github</a></h2>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End Contact Section -->
+    </section>
 
-  <!-- Footer -->
-  <section id="footer">
-    <div class="footer container">
-      <div class="brand">
-        <h1><span>A</span>li <span>H</span>amdy</h1>
-      </div>
-      <h2>Your Complete Web Solution</h2>
-      <p>Copyright © 2025 Ali. All rights reserved</p>
-    </div>
-  </section>
-  <!-- End Footer -->
-  <script src="./app.js"></script>
+    <section id="contact" class="bg-white section-padding">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
+            
+            <div class="reveal">
+                <span class="editorial-label mb-6">—— GET IN TOUCH</span>
+                <h2 class="font-satoshi text-5xl font-extrabold tracking-tight text-on-surface mb-8">Let's build something great together.</h2>
+                
+                <div class="flex flex-col gap-6 mb-10">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">location_on</span>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Location</p>
+                            <p class="text-on-surface font-medium">Cairo, Egypt</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">mail</span>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Email</p>
+                            <p class="text-on-surface font-medium">alihmdy777@email.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">schedule</span>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Response</p>
+                            <p class="text-on-surface font-medium">Usually within 24 hours</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <a href="https://github.com/alihamdy135" target="_blank" class="w-12 h-12 border border-surface-container rounded-lg flex items-center justify-center text-slate-500 hover:text-primary hover:border-primary-container transition-all">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="w-6 h-6 dev-icon" alt="GitHub">
+                    </a>
+                    <a href="https://www.linkedin.com/in/ali-hamdi-3b8033215/" target="_blank" class="w-12 h-12 border border-surface-container rounded-lg flex items-center justify-center text-slate-500 hover:text-primary hover:border-primary-container transition-all">
+                        <svg class="w-6 h-6 dev-icon" viewBox="0 0 128 128" fill="currentColor">
+                            <path d="M116 3H12a8.91 8.91 0 00-9 8.8v104.42a8.91 8.91 0 009 8.78h104a8.93 8.93 0 009-8.81V11.77A8.93 8.93 0 00116 3zM39.17 107H21.06V48.73h18.11zm-9-66.21a10.5 10.5 0 1110.49-10.5 10.5 10.5 0 01-10.54 10.48zM107 107H88.89V78.65c0-6.75-.12-15.44-9.41-15.44-9.42 0-10.85 7.36-10.85 15V107H50.53V48.73h17.36v8h.24c2.42-4.58 8.32-9.41 17.13-9.41 18.33 0 21.7 12.08 21.7 27.79z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:alihmdy777@email.com" class="w-12 h-12 border border-surface-container rounded-lg flex items-center justify-center text-slate-500 hover:text-primary hover:border-primary-container transition-all">
+                        <span class="material-symbols-outlined">alternate_email</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-surface-low rounded-2xl border border-surface-container p-10 reveal" data-delay="200">
+                <form id="contact-form" class="flex flex-col gap-5">
+                    <div class="flex flex-col sm:flex-row gap-5 w-full">
+                        <div class="w-full">
+                            <label for="name" class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1 block">Name</label>
+                            <input type="text" id="name" class="bg-white border border-surface-container rounded-lg p-3 text-sm w-full focus:ring-0">
+                            <span class="error-msg text-red-500 text-xs hidden mt-1">Name is required</span>
+                        </div>
+                        <div class="w-full">
+                            <label for="email" class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1 block">Email</label>
+                            <input type="email" id="email" class="bg-white border border-surface-container rounded-lg p-3 text-sm w-full focus:ring-0">
+                            <span class="error-msg text-red-500 text-xs hidden mt-1">Valid email is required</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="subject" class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1 block">Subject</label>
+                        <input type="text" id="subject" class="bg-white border border-surface-container rounded-lg p-3 text-sm w-full focus:ring-0">
+                        <span class="error-msg text-red-500 text-xs hidden mt-1">Subject is required</span>
+                    </div>
+                    <div>
+                        <label for="message" class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1 block">Message</label>
+                        <textarea id="message" rows="5" class="bg-white border border-surface-container rounded-lg p-3 text-sm w-full resize-y focus:ring-0"></textarea>
+                        <span class="error-msg text-red-500 text-xs hidden mt-1">Message is required</span>
+                    </div>
+                    <button type="submit" id="submit-btn" class="gradient-primary text-white w-full py-4 rounded-lg font-satoshi font-bold mt-2 flex items-center justify-center gap-2 hover:opacity-90 transition-all">
+                        Send Message <span class="material-symbols-outlined text-lg">send</span>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-surface py-12 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center gap-6">
+            <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400 text-center">
+                © 2026 Ali Hamdy · Built with pure code & too much coffee
+            </p>
+            <div class="flex gap-12 font-mono text-xs uppercase tracking-wider text-slate-400">
+                <a href="https://github.com/alihamdy135" target="_blank" class="hover:text-primary transition-colors">GitHub</a>
+                <a href="https://www.linkedin.com/in/ali-hamdi-3b8033215/" target="_blank" class="hover:text-primary transition-colors">LinkedIn</a>
+                <a href="https://alihamdy135.github.io/Portfolio/" target="_blank" class="hover:text-primary transition-colors">Portfolio</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. TYPEWRITER ROTATOR
+            const rotatorArr = ["Flutter Apps", "Embedded Systems", "IoT Solutions", "AI Models", ".NET Backends"];
+            const rotatorEl = document.getElementById('hero-rotator');
+            let rotatorIdx = 0;
+            
+            setInterval(() => {
+                rotatorEl.style.opacity = '0';
+                setTimeout(() => {
+                    rotatorIdx = (rotatorIdx + 1) % rotatorArr.length;
+                    rotatorEl.textContent = rotatorArr[rotatorIdx];
+                    rotatorEl.style.opacity = '1';
+                }, 300);
+            }, 2200);
+
+            // 2. SCROLL SPY
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(sec => observer.observe(sec));
+
+            // 3. COUNTER ANIMATION
+            const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+            const counters = document.querySelectorAll('.counter');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 1800; // ms
+                let startTime = null;
+
+                const step = (timestamp) => {
+                    if (!startTime) startTime = timestamp;
+                    const progress = Math.min((timestamp - startTime) / duration, 1);
+                    const easedProgress = easeOutCubic(progress);
+                    const currentVal = Math.floor(easedProgress * target);
+                    
+                    counter.textContent = currentVal;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        counter.textContent = target; // Ensure exact match at end
+                    }
+                };
+                
+                // Start animation on load
+                requestAnimationFrame(step);
+            });
+
+            // 4. SCROLL REVEAL
+            const reveals = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = entry.target.getAttribute('data-delay') || 0;
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, delay);
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            reveals.forEach(el => revealObserver.observe(el));
+
+            // 5. MOBILE NAV TOGGLE
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileBtn.addEventListener('click', () => {
+                const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+                mobileBtn.setAttribute('aria-expanded', !isExpanded);
+                if (isExpanded) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                } else {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('flex');
+                }
+            });
+
+            // Close mobile menu on link click
+            document.querySelectorAll('#mobile-menu .nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileBtn.setAttribute('aria-expanded', 'false');
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                });
+            });
+
+            // 6. FORM VALIDATION & SUBMIT
+            const form = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('submit-btn');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let isValid = true;
+                
+                const fields = [
+                    { id: 'name', check: val => val.trim() !== '' },
+                    { id: 'email', check: val => val.trim() !== '' && val.includes('@') },
+                    { id: 'subject', check: val => val.trim() !== '' },
+                    { id: 'message', check: val => val.trim() !== '' }
+                ];
+
+                fields.forEach(field => {
+                    const input = document.getElementById(field.id);
+                    const errorMsg = input.nextElementSibling;
+                    if (!field.check(input.value)) {
+                        isValid = false;
+                        errorMsg.classList.remove('hidden');
+                        input.classList.add('border-red-500');
+                    } else {
+                        errorMsg.classList.add('hidden');
+                        input.classList.remove('border-red-500');
+                    }
+                });
+
+                if (isValid) {
+                    // Success state
+                    const originalContent = submitBtn.innerHTML;
+                    const originalClasses = submitBtn.className;
+                    
+                    submitBtn.innerHTML = '✓ Message Sent!';
+                    submitBtn.className = 'bg-green-500 text-white w-full py-4 rounded-lg font-satoshi font-bold mt-2 flex items-center justify-center transition-all';
+                    
+                    setTimeout(() => {
+                        form.reset();
+                        submitBtn.innerHTML = originalContent;
+                        submitBtn.className = originalClasses;
+                    }, 3000);
+                }
+            });
+
+            // 7. DEVICON FALLBACK
+            const images = document.querySelectorAll('img.dev-icon');
+            images.forEach(img => {
+                img.onerror = function() {
+                    const alt = this.alt ? this.alt.substring(0, 2).toUpperCase() : '??';
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'w-[22px] h-[22px] rounded-full bg-primary-light border border-primary-container flex items-center justify-center text-[10px] font-bold text-primary shrink-0';
+                    wrapper.textContent = alt;
+                    this.parentNode.replaceChild(wrapper, this);
+                };
+            });
+
+        });
+    </script>
 </body>
-
 </html>
